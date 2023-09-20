@@ -16,10 +16,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "include": ["typing.d.ts", "./src"]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

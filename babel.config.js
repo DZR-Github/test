@@ -1,26 +1,27 @@
-const presets = [
-  [
-    "@babel/preset-env",
-    {
-      useBuiltIns: "usage", // 代码中需要哪些polyfill, 就引用相关的api
-      corejs: 3, // 还需要配置corejs的
-    },
-  ],
-  ["@babel/preset-react"],
-  ["@babel/preset-typescript"],
-];
-
-const plugins = [];
-const isProduction = process.env.NODE_ENV === "production";
-
-// React HMR -> 模块的热替换 必然是在开发时才有效果
-if (!isProduction) {
-  // console.log(isProduction, typeof isProduction, "---------");
-  plugins.push(["react-refresh/babel"]);
-} else {
-}
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  presets,
-  plugins
-};
+  // 执行顺序由右往左，所以先处理ts，再处理jsx,最后再试一下babel转换为低版本语法
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        // 设置兼容目标浏览器版本,这里可以不写，babel-loader会自动寻找上面配置好的文件.browserslistrc
+        // "targets": {
+        //  "chrome": 35,
+        //  "ie": 9
+        // },
+        "useBuiltIns": "usage", // 根据配置的浏览器兼容，以及代码中使用到的api进行引入polyfill按需添加
+        "corejs": 3 // 配置使用core-js低版本
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    isDev && require.resolve('react-refresh/babel'), // 配置react开发环境热替换
+    [
+      "@babel/plugin-proposal-decorators", { "legacy": true }
+    ]
+  ].filter(Boolean)
+}

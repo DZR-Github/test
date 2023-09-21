@@ -1,4 +1,68 @@
-h2 {
-  color: red;
-  transform: translateY(100px);
+h1 {
+  color: gray;
+}
+
+.text {
+  color: #ffca28;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #898585;
+}
+
+.box {
+  width: 400px;
+  height: 200px;
+  background-color: skyblue;
+}
+
+@media (max-width: 1040px) {
+  .box {
+    width: 768px;
+  }
+}
+
+@media (max-width: 1230px) {
+  .box {
+    width: 1040px;
+  }
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -100;
+}
+
+.leftImg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 394px;
+  height: 456px;
+}
+
+.rightImg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 487px;
+  height: 412px;
 }
